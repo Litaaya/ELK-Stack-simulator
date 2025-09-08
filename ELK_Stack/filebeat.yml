@@ -1,0 +1,23 @@
+filebeat.inputs:
+  - type: log
+    enabled: true
+    paths:
+      - /app/logs/*.log
+    scan_frequency: 3s
+
+#    multiline.pattern: '^{'
+#    multiline.negate: true
+#    multiline.match: after
+
+# Gửi log tới Logstash
+output.logstash:
+  hosts: ["logstash:5044"]
+
+# Log debug
+logging.level: info
+logging.to_files: true
+logging.files:
+  path: filebeat-logs
+  name: filebeat.log
+  keepfiles: 3
+  permissions: 0644
